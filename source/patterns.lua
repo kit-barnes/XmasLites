@@ -36,7 +36,7 @@ function p1()
 	local streak_spot, streak_stop, streak_direction, streak_hue = 0, 0, 0, 0;
 	-- setup the buffers
 	local background_buffer = ws2812.newBuffer(num_leds, 3);
-	background_buffer:fill(12,0,0);
+	background_buffer:fill(24,0,0);
 	local foreground_buffer = ws2812.newBuffer(num_leds, 3);
 	foreground_buffer:fill(0,0,0);	
 	-- run the effect
@@ -63,11 +63,11 @@ function p1()
 			-- randomize background under streak
 			local c = rand(6);
 			if c<=3 then
-				background_buffer:set(streak_spot, string.char(12,0,0));
+				background_buffer:set(streak_spot, string.char(24,0,0));
 			elseif c<=5 then
-				background_buffer:set(streak_spot, string.char(0,9,0));
+				background_buffer:set(streak_spot, string.char(0,16,0));
 			else
-				background_buffer:set(streak_spot, string.char(8,7,4));
+				background_buffer:set(streak_spot, string.char(12,10,5));
 			end
 			-- move spot
 			if streak_direction == 1 then
@@ -173,4 +173,16 @@ function p3()
 		display_buffer:mix(i20[peak],buf1,i20[21-peak],buf2);
 		ws2812.write(display_buffer);
 	end)
+end
+
+
+setlights = function(btn)
+	
+	if btn == "Off" then off();
+	elseif btn == "Sparkle" then stop(); p1();
+	elseif btn == "Waves" then stop(); p2();
+	elseif btn == "Pulse" then stop(); p3();
+	else return;
+	end
+	pattern = btn;
 end

@@ -30,11 +30,11 @@ tmr.alarm(0, 500, tmr.ALARM_AUTO, function()
 		display_buffer:fill(0,128,0);			-- green - telnet & FTP servers up, caling main
 		ws2812.write(display_buffer);
 
-		if file.exists("main.lua") then
-			dofile("main.lua");
+		if file.exists("main.lua") then 
+			tmr.alarm(0, 15000, tmr.ALARM_SINGLE, function()
+				dofile("main.lua");
+			end)
 		end
-	else
-		print(".");
 	end
 end)
 
