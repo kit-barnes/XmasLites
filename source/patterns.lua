@@ -17,6 +17,7 @@ local color = {
 
 function stopeffect()
 	if effect_timer:state() then effect_timer:unregister() end
+	pattern = nil
 end
 
 function stop()
@@ -175,14 +176,39 @@ function p3()
 	end)
 end
 
+local patterns = {
+	{ name = "Sparkle", f = p1 },
+	{ name = "Waves", f = p2 },
+	{ name = "Pulse", f = p3 },
+}
+
+function all()
+
+	local p
+	local f = function()
+		local q = patterns[rand(#patterns)];
+		if p ~= q then
+			p = q
+			p.f()
+		end
+	end
+	f()
+	function_timer:alarm(120000, tmr.ALARM_AUTO, f )
+end
 
 setlights = function(btn)
 	
+	if not btn then btn = "nil"; end
 	if btn == "Off" then off();
-	elseif btn == "Sparkle" then stop(); p1();
-	elseif btn == "Waves" then stop(); p2();
-	elseif btn == "Pulse" then stop(); p3();
-	else return;
+	elseif btn == "All" then stop(); all();
+	else
+		for i,p in ipairs(patterns) do
+			if btn == p.name then
+				stop();
+				p.f();
+				break;
+			end
+		end
 	end
 	pattern = btn;
 end

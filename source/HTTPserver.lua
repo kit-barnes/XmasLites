@@ -10,7 +10,7 @@ HTTP/1.0 200 OK
 <body>
 <h2>Pattern</h2>
 <form method=post action="" enctype="text/plain">
-  <input type="submit" name="pattern" value="Off">
+  <input type="submit" name="pattern" value="All">
   <input type="submit" name="pattern" value="Sparkle">
   <input type="submit" name="pattern" value="Waves">
   <input type="submit" name="pattern" value="Pulse">
