@@ -176,10 +176,41 @@ function p3()
 	end)
 end
 
+function p4()
+
+	stopeffect();
+	local r = 64;
+	local g = 0;
+	display_buffer:fill(r,g,0);
+	ws2812.write(display_buffer);
+
+	local a = {};
+	for i = 1, num_leds do a[i] = i; end
+	local x = num_leds;
+	function fp4()
+		if x == num_leds then
+			r, g = g*2, r/2;
+			x = 0;
+			for i = num_leds, 2, -1 do
+				local j = node.random(i);
+				a[i], a[j] = a[j], a[i];
+			end
+			effect_timer:alarm(15000, tmr.ALARM_SINGLE , fp4)
+		else
+			x = x + 1;
+			display_buffer:set(a[x], string.char(r,g,0));
+			ws2812.write(display_buffer);
+			effect_timer:alarm(100, tmr.ALARM_SINGLE , fp4)
+		end
+	end
+	fp4();
+end
+
 local patterns = {
 	{ name = "Sparkle", f = p1 },
 	{ name = "Waves", f = p2 },
 	{ name = "Pulse", f = p3 },
+	{ name = "RnG", f = p4 },
 }
 
 function all()

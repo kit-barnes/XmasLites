@@ -14,6 +14,7 @@ HTTP/1.0 200 OK
   <input type="submit" name="pattern" value="Sparkle">
   <input type="submit" name="pattern" value="Waves">
   <input type="submit" name="pattern" value="Pulse">
+  <input type="submit" name="pattern" value="RnG">
 </form>
 </body>
 </html>
