@@ -154,24 +154,31 @@ function p3()
 	stopeffect();
 	local buf1 = ws2812.newBuffer(num_leds, 3);
 	local buf2 = ws2812.newBuffer(num_leds, 3);
+	local buf3 = ws2812.newBuffer(num_leds, 3);
 	
-	local i20 = {0,1,2,3,4,5,7,9,12,16,21,27,38,49,64,84,111,147,194,255}
+	local i20 = {0,1,2,3,4, 5,7,9,12,16, 21,27,38,49,64, 84,111,147,194,255}
 	
-	local x = 40;
+	local w = 39;
 	effect_timer:alarm(30, tmr.ALARM_AUTO, function()
-		x = x%40 + 1;
+		w = w%39 + 1;
+		local x = w;
+		local y = (w+13)%39 + 1;
+		local z = (w+26)%39 + 1;
 		if x == 1 then			-- set buf1 colors
 			buf1:fill(0,0,0);
-			for i = 1,num_leds,2 do buf1:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
-		elseif x == 21 then		-- set buf2 colors
+			for i = 1,num_leds,3 do buf1:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+		elseif y == 1 then		-- set buf2 colors
 			buf2:fill(0,0,0);
-			for i = 2,num_leds,2 do buf2:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+			for i = 2,num_leds,3 do buf2:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+		elseif z == 1 then		-- set buf3 colors
+			buf3:fill(0,0,0);
+			for i = 3,num_leds,3 do buf3:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
 		end
-		local peak;		-- 1 -> 20 -> 1
-		if x <= 20 then peak = x;
-		else peak = 41 - x;
-		end
-		display_buffer:mix(i20[peak],buf1,i20[21-peak],buf2);
+		--local peak;		-- 1 -> 20 -> 1
+		if x > 20 then x = 40 - x; end
+		if y > 20 then y = 40 - y; end
+		if z > 20 then z = 40 - z; end
+		display_buffer:mix(i20[x],buf1, i20[y],buf2, i20[z],buf3);
 		ws2812.write(display_buffer);
 	end)
 end
@@ -200,16 +207,17 @@ function p4()
 			x = x + 1;
 			display_buffer:set(a[x], string.char(r,g,0));
 			ws2812.write(display_buffer);
-			effect_timer:alarm(100, tmr.ALARM_SINGLE , fp4)
+			effect_timer:alarm(20, tmr.ALARM_SINGLE , fp4)
 		end
 	end
 	fp4();
 end
 
+
 local patterns = {
 	{ name = "Sparkle", f = p1 },
 	{ name = "Waves", f = p2 },
-	{ name = "Pulse", f = p3 },
+	{ name = "TriPh", f = p3 },
 	{ name = "RnG", f = p4 },
 }
 
