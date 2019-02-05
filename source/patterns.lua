@@ -155,6 +155,8 @@ function p3()
 	local buf1 = ws2812.newBuffer(num_leds, 3);
 	local buf2 = ws2812.newBuffer(num_leds, 3);
 	local buf3 = ws2812.newBuffer(num_leds, 3);
+	local buf4 = ws2812.newBuffer(num_leds, 3);
+	local buf5 = ws2812.newBuffer(num_leds, 3);
 	
 	local i20 = {0,1,2,3,4, 5,7,9,12,16, 21,27,38,49,64, 84,111,147,194,255}
 	
@@ -162,23 +164,33 @@ function p3()
 	effect_timer:alarm(30, tmr.ALARM_AUTO, function()
 		w = w%39 + 1;
 		local x = w;
-		local y = (w+13)%39 + 1;
-		local z = (w+26)%39 + 1;
+		local y = (w+16)%39 + 1;
+		local z = (w+32)%39 + 1;
+		local u = (w+8)%39 + 1;
+		local v = (w+24)%39 + 1;
 		if x == 1 then			-- set buf1 colors
 			buf1:fill(0,0,0);
-			for i = 1,num_leds,3 do buf1:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+			for i = 1,num_leds,5 do buf1:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
 		elseif y == 1 then		-- set buf2 colors
-			buf2:fill(0,0,0);
-			for i = 2,num_leds,3 do buf2:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
-		elseif z == 1 then		-- set buf3 colors
 			buf3:fill(0,0,0);
-			for i = 3,num_leds,3 do buf3:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+			for i = 3,num_leds,5 do buf3:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+		elseif z == 1 then		-- set buf3 colors
+			buf5:fill(0,0,0);
+			for i = 5,num_leds,5 do buf5:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+		elseif u == 1 then		-- set buf2 colors
+			buf2:fill(0,0,0);
+			for i = 2,num_leds,5 do buf2:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
+		elseif v == 1 then		-- set buf3 colors
+			buf4:fill(0,0,0);
+			for i = 4,num_leds,5 do buf4:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
 		end
 		--local peak;		-- 1 -> 20 -> 1
 		if x > 20 then x = 40 - x; end
 		if y > 20 then y = 40 - y; end
 		if z > 20 then z = 40 - z; end
-		display_buffer:mix(i20[x],buf1, i20[y],buf2, i20[z],buf3);
+		if u > 20 then u = 40 - u; end
+		if v > 20 then v = 40 - v; end
+		display_buffer:mix(i20[x],buf1, i20[y],buf3, i20[z],buf5, i20[u],buf2, i20[z],buf4);
 		ws2812.write(display_buffer);
 	end)
 end
@@ -217,7 +229,7 @@ end
 local patterns = {
 	{ name = "Sparkle", f = p1 },
 	{ name = "Waves", f = p2 },
-	{ name = "TriPh", f = p3 },
+	{ name = "PentaPh", f = p3 },
 	{ name = "RnG", f = p4 },
 }
 

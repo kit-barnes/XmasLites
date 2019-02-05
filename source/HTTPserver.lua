@@ -13,7 +13,7 @@ HTTP/1.0 200 OK
   <input type="submit" name="pattern" value="All">
   <input type="submit" name="pattern" value="Sparkle">
   <input type="submit" name="pattern" value="Waves">
-  <input type="submit" name="pattern" value="TriPh">
+  <input type="submit" name="pattern" value="PentaPh">
   <input type="submit" name="pattern" value="RnG">
 </form>
 </body>
