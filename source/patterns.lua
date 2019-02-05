@@ -171,16 +171,16 @@ function p3()
 		if x == 1 then			-- set buf1 colors
 			buf1:fill(0,0,0);
 			for i = 1,num_leds,5 do buf1:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
-		elseif y == 1 then		-- set buf2 colors
+		elseif y == 1 then		-- set buf3 colors
 			buf3:fill(0,0,0);
 			for i = 3,num_leds,5 do buf3:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
-		elseif z == 1 then		-- set buf3 colors
+		elseif z == 1 then		-- set buf5 colors
 			buf5:fill(0,0,0);
 			for i = 5,num_leds,5 do buf5:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
 		elseif u == 1 then		-- set buf2 colors
 			buf2:fill(0,0,0);
 			for i = 2,num_leds,5 do buf2:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
-		elseif v == 1 then		-- set buf3 colors
+		elseif v == 1 then		-- set buf4 colors
 			buf4:fill(0,0,0);
 			for i = 4,num_leds,5 do buf4:set(i,i20[rand(20)],i20[rand(20)],i20[rand(20)]); end
 		end
@@ -190,7 +190,7 @@ function p3()
 		if z > 20 then z = 40 - z; end
 		if u > 20 then u = 40 - u; end
 		if v > 20 then v = 40 - v; end
-		display_buffer:mix(i20[x],buf1, i20[y],buf3, i20[z],buf5, i20[u],buf2, i20[z],buf4);
+		display_buffer:mix(i20[x],buf1, i20[y],buf3, i20[z],buf5, i20[u],buf2, i20[v],buf4);
 		ws2812.write(display_buffer);
 	end)
 end
