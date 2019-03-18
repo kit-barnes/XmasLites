@@ -2,7 +2,7 @@
 
 ws2812.init()
 
-num_leds = 150;
+num_leds = 200;
 display_buffer = ws2812.newBuffer(num_leds, 3);
 
 display_buffer:fill(128,0,0);					-- red (no connection yet)

@@ -85,37 +85,34 @@ function p1()
 	end)
 end
 
-function p2()		-- num_leds BETTER be 150!! 
+function p2()		-- num_leds BETTER be 200!! 
 
 	stopeffect();
-	local i18 = {0,1,1,2,3,4,6,10,16,26,41,64,95,134,176,216,245,255};
-	local i15 = {0,1,2,3,4,7,12,21,38,64,102,150,201,241,255};
-	local i12 = {0,1,2,4,8,16,33,64,113,176,233,255};
+	local t34 = {1,1,1,2,2,2,3,3,4,4,5,6,8,9,11,12,15,17,21,24,29,34,40,48,56,67,79,93,110,131,155,183,216,255};
+	local t25 = {1,1,2,2,3,3,4,5,6,8,10,13,16,20,25,32,40,51,64,81,102,128,161,203,255};
+	local t20 = {1,1,2,2,3,4,6,8,10,14,19,25,33,44,59,80,107,143,191,255};
 	
 	local x;
 	local buf1 = ws2812.newBuffer(num_leds, 3);
-	for i = 1,12 do x = i12[i];		-- 6 cycles red
-		buf1:set(i, x,0,0); buf1:set(25-i, x,0,0);
-		buf1:set(25+i, x,0,0); buf1:set(51-i, x,0,0);
-		buf1:set(50+i, x,0,0); buf1:set(75-i, x,0,0);
-		buf1:set(75+i, x,0,0); buf1:set(101-i, x,0,0);
-		buf1:set(100+i, x,0,0); buf1:set(125-i, x,0,0);
-		buf1:set(125+i, x,0,0); buf1:set(151-i, x,0,0);
+	for i = 1,34 do x = t34[i];		-- 3 cycles red
+		buf1:set(i, x,0,0); buf1:set(69-i, x,0,0);
+		buf1:set(66+i, x,0,0); buf1:set(135-i, x,0,0);
+		buf1:set(132+i, x,0,0); buf1:set(201-i, x,0,0);
 	end
 	local buf2 = ws2812.newBuffer(num_leds, 3);
-	for i = 1,18 do x = i18[i];		-- 4 cycles green
-		buf2:set(i, 0,x,0); buf2:set(37-i, 0,x,0);
-		buf2:set(37+i, 0,x,0); buf2:set(74-i, 0,x,0);
-		buf2:set(75+i, 0,x,0); buf2:set(112-i, 0,x,0);
-		buf2:set(112+i, 0,x,0); buf2:set(149-i, 0,x,0);
+	for i = 1,25 do x = t25[i];		-- 4 cycles green
+		buf2:set(i, 0,x,0); buf2:set(51-i, 0,x,0);
+		buf2:set(50+i, 0,x,0); buf2:set(101-i, 0,x,0);
+		buf2:set(100+i, 0,x,0); buf2:set(151-i, 0,x,0);
+		buf2:set(150+i, 0,x,0); buf2:set(201-i, 0,x,0);
 	end
 	local buf3 = ws2812.newBuffer(num_leds, 3);
-	for i = 1,15 do x = i15[i];		-- 5 cycles blue
-		buf3:set(i, 0,0,x); buf3:set(31-i, 0,0,x);
-		buf3:set(30+i, 0,0,x); buf3:set(61-i, 0,0,x);
-		buf3:set(60+i, 0,0,x); buf3:set(91-i, 0,0,x);
-		buf3:set(90+i, 0,0,x); buf3:set(121-i, 0,0,x);
-		buf3:set(120+i, 0,0,x); buf3:set(151-i, 0,0,x);
+	for i = 1,20 do x = t20[i];		-- 5 cycles blue
+		buf3:set(i, 0,0,x); buf3:set(41-i, 0,0,x);
+		buf3:set(40+i, 0,0,x); buf3:set(81-i, 0,0,x);
+		buf3:set(80+i, 0,0,x); buf3:set(121-i, 0,0,x);
+		buf3:set(120+i, 0,0,x); buf3:set(161-i, 0,0,x);
+		buf3:set(160+i, 0,0,x); buf3:set(201-i, 0,0,x);
 	end
 	local buffers, chan, v = {buf1,buf2,buf3}, {1,2,3}, 1;
 		-- chanX identifies the color (1,2,3=r,g,b) in buffersX
